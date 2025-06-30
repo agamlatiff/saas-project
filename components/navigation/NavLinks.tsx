@@ -1,11 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
-import clsx from "clsx";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 import { BiLogInCircle, BiMenu } from "react-icons/bi";
 import { GrClose } from "react-icons/gr";
+import clsx from "clsx";
 
 const navLinks = [
   { label: "Product", href: "/product" },
@@ -16,62 +16,74 @@ const navLinks = [
 ];
 
 const NavLinks = () => {
-  const router = usePathname();
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const pathname = usePathname();
+  const [isOpen, setIsOpen] = useState(false);
 
-  function handlerIsOpen() {
-    setIsOpen(!isOpen);
-  }
+  const toggleMenu = () => setIsOpen(!isOpen);
+  const closeMenu = () => setIsOpen(false);
 
   return (
     <>
-      {/* Desktop Responsive */}
-      <nav className="hidden gap-6 md:flex ">
+      {/* Desktop */}
+      <nav className="hidden md:flex items-center gap-6">
         {navLinks.map((link) => (
           <Link
-            onClick={handlerIsOpen}
-            href={link.href}
             key={link.label}
-            className={`text-base font-semibold hover:text-stone-900 ${clsx(
-              link.href === router ? "text-stone-900" : "text-stone-400"
-            )}`}
+            href={link.href}
+            className={clsx(
+              "text-sm font-medium transition-colors",
+              pathname === link.href
+                ? "text-indigo-600"
+                : "text-gray-500 hover:text-gray-800"
+            )}
           >
             {link.label}
           </Link>
         ))}
-
-        <button>
-          <BiLogInCircle className="size-5 text-stone-400 hover:text-stone-800" />
+        <button aria-label="Sign in">
+          <BiLogInCircle className="text-xl text-gray-500 hover:text-gray-800 transition" />
         </button>
       </nav>
-      <BiMenu
-        onClick={handlerIsOpen}
-        className="size-7 md:hidden text-stone-400 hover:text-stone-800"
-      />
 
-      {/* Mobile Responsive */}
+      {/* Mobile Button */}
+      <button onClick={toggleMenu} className="md:hidden text-2xl text-gray-500">
+        {isOpen ? <GrClose /> : <BiMenu />}
+      </button>
+
+      {/* Mobile Menu */}
       {isOpen && (
-        <nav className="fixed right-0 top-0 flex flex-col w-1/2 h-screen bg-stone-200 gap-6 md:hidden items-center py-12  ">
-          <GrClose
-            className="size-6 text-stone-400 hover:text-stone-800"
-            onClick={handlerIsOpen}
-          />
-          {navLinks.map((link) => (
-            <Link
-              href={link.href}
-              key={link.label}
-              className={`text-base font-semibold hover:text-stone-900 ${clsx(
-                link.href === router ? "text-stone-900" : "text-stone-400"
-              )}`}
-            >
-              <button onClick={handlerIsOpen}>{link.label}</button>
-            </Link>
-          ))}
+        <div className="fixed inset-0 bg-black/40 z-40 md:hidden" onClick={closeMenu}>
+          <nav
+            className="absolute top-0 right-0 h-full w-64 bg-white shadow-lg p-6 flex flex-col gap-6"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex justify-end">
+              <button onClick={closeMenu}>
+                <GrClose className="text-xl text-gray-600" />
+              </button>
+            </div>
 
-          <button className="border py-1 px-6 rounded-full border-stone-800 hover:bg-stone-800 hover:text-white ">
-            Sign In
-          </button>
-        </nav>
+            {navLinks.map((link) => (
+              <Link
+                key={link.label}
+                href={link.href}
+                onClick={closeMenu}
+                className={clsx(
+                  "text-base font-semibold transition-colors",
+                  pathname === link.href
+                    ? "text-indigo-600"
+                    : "text-gray-600 hover:text-gray-900"
+                )}
+              >
+                {link.label}
+              </Link>
+            ))}
+
+            <button className="mt-4 border border-gray-800 px-4 py-2 rounded-full text-sm font-medium hover:bg-gray-900 hover:text-white transition">
+              Sign In
+            </button>
+          </nav>
+        </div>
       )}
     </>
   );

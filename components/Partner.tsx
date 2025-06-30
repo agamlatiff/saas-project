@@ -39,7 +39,7 @@ const partnerships = [
 const Partner = () => {
   return (
     <div className="text-center mt-20 text-2xl font-medium my-20 ">
-      <h1 className="mb-15">The world&apos;s best companies trust Frontier</h1>
+      <h1 className="mb-15">The world&apos;s best companies trust Higher</h1>
       <Marquee gradient={false} speed={50} pauseOnHover={true}>
         {[...partnerships, ...partnerships].map((partner, index) => (
           <div key={`${index}-${partner.id}`} className="mx-12 *:size-14">

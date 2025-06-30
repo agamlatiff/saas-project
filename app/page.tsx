@@ -1,20 +1,30 @@
-import BenefitsHome from "@/components/home/BenefitsHome";
-import HeroHome from "@/components/home/HeroHome";
-import JourneyHome from "@/components/home/JourneyHome";
+import BenefitsHome from "@/components/homes/BenefitsHome";
+import BlogHome from "@/components/homes/BlogHome";
+import FeaturesHome from "@/components/homes/FeaturesHome";
+import HeroHome from "@/components/homes/HeroHome";
+import IntegrationsHome from "@/components/homes/IntegrationsHome";
+import Journey from "@/components/Journey";
 import Partner from "@/components/Partner";
+import Solutions from "@/components/SolutionsHome";
+import Testimonials from "@/components/Testimonials";
 
 
 export default function Home() {
   return (
-    <div className="px-5">
+    <div>
       <HeroHome/>
       <Partner/>
       <div className="text-center my-22 space-y-8">
-        <h1 className="text-2xl text-stone-700 font-medium">Frontier is used by 100.000+ companies across the globe</h1>
-        <button className="py-2 px-6 rounded-full ring-2 ring-indigo-600 hover:ring-3 text-stone-900">Start you Frontier Journey</button>
+        <h1 className="text-2xl text-stone-700 font-medium">Higher is used by 100.000+ companies across the globe</h1>
+        <button className="py-2 px-6 rounded-full ring-2 ring-indigo-600 hover:ring-3 text-stone-900">Start you Higher Journey</button>
       </div>
       <BenefitsHome/>
-      <JourneyHome/>
+      <Journey/>
+      <FeaturesHome/>
+      <Solutions/>
+      <IntegrationsHome/>
+      <Testimonials/>
+      <BlogHome/>
     </div>
   );
 }
