@@ -22,7 +22,7 @@ export default function BlogHome() {
                 alt={article.title}
                 width={400}
                 height={250}
-                className="w-full object-cover"
+                className="w-full object-cover size-70"
               />
             </div>
             <div className="flex space-x-2 text-sm text-gray-400 mb-1">
