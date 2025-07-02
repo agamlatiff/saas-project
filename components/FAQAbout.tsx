@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { FiChevronDown } from "react-icons/fi";
-import Title from "../elements/Title"; // Sesuaikan dengan komponen judul kamu
+import Title from "./elements/Title"; // Sesuaikan dengan komponen judul kamu
 
 const faqs = [
   {
@@ -30,7 +30,7 @@ const faqs = [
   },
 ];
 
-const FaqHome = () => {
+const FAQ = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggle = (index: number) => {
@@ -84,4 +84,4 @@ const FaqHome = () => {
   );
 };
 
-export default FaqHome;
+export default FAQ;

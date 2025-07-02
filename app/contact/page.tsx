@@ -1,5 +1,13 @@
+import HeroContact from "@/components/contacts/HeroContact";
+import FAQ from "@/components/FAQAbout";
+import Testimonials from "@/components/Testimonials";
+
 const page = () => {
-  return <div>page</div>;
+  return <div>
+    <HeroContact/>
+    <Testimonials/>
+    <FAQ/>
+  </div>;
 };
 
 export default page;
