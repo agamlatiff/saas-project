@@ -13,6 +13,7 @@ const navLinks = [
   { label: "Pricing", href: "/pricing" },
   { label: "Contact", href: "/contact" },
   { label: "Blog", href: "/blog" },
+  { label:  <BiLogInCircle className="hidden md:block text-xl text-gray-500 hover:text-gray-800 transition" />, href: "/login" },
 ];
 
 const NavLinks = () => {
@@ -26,9 +27,9 @@ const NavLinks = () => {
     <>
       {/* Desktop */}
       <nav className="hidden md:flex items-center gap-6">
-        {navLinks.map((link) => (
+        {navLinks.map((link, index) => (
           <Link
-            key={link.label}
+            key={index}
             href={link.href}
             className={clsx(
               "text-sm font-medium transition-colors",
@@ -40,9 +41,6 @@ const NavLinks = () => {
             {link.label}
           </Link>
         ))}
-        <button aria-label="Sign in">
-          <BiLogInCircle className="text-xl text-gray-500 hover:text-gray-800 transition" />
-        </button>
       </nav>
 
       {/* Mobile Button */}
@@ -52,7 +50,10 @@ const NavLinks = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="fixed inset-0 bg-black/40 z-40 md:hidden" onClick={closeMenu}>
+        <div
+          className="fixed inset-0 bg-black/40 z-40 md:hidden"
+          onClick={closeMenu}
+        >
           <nav
             className="absolute top-0 right-0 h-full w-64 bg-white shadow-lg p-6 flex flex-col gap-6"
             onClick={(e) => e.stopPropagation()}
@@ -63,9 +64,9 @@ const NavLinks = () => {
               </button>
             </div>
 
-            {navLinks.map((link) => (
+            {navLinks.map((link,index) => (
               <Link
-                key={link.label}
+                key={index}
                 href={link.href}
                 onClick={closeMenu}
                 className={clsx(
@@ -80,7 +81,7 @@ const NavLinks = () => {
             ))}
 
             <button className="mt-4 border border-gray-800 px-4 py-2 rounded-full text-sm font-medium hover:bg-gray-900 hover:text-white transition">
-              Sign In
+              <Link href={"/login"}>Sign In</Link>
             </button>
           </nav>
         </div>
